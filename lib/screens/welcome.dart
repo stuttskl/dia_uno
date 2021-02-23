@@ -7,7 +7,13 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  int _count = 0;
+  goToNew(context, destination) {
+    print("Going to new entry page");
+    if (destination == 'newJournalEntry') {
+      Navigator.pushNamed(context, 'newJournalEntry');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,8 +61,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(() => _count++),
-        tooltip: 'Increment Counter',
+        onPressed: () => goToNew(context, 'newJournalEntry'),
+        tooltip: 'New Journal Entry',
         child: const Icon(Icons.add),
       ),
     );
