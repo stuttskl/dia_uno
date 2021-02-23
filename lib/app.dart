@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import './screens/welcome.dart';
 import './screens/new_journal_entry.dart';
+import './screens/journal_entries.dart';
 
 class App extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       routes: routes,
       title: 'Dia Uno',
-      home: WelcomeScreen(),
+      home: JournalEntries(),
       theme: ThemeData.dark()
     );
   }
