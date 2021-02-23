@@ -1,4 +1,4 @@
-import 'package:dia_uno/models/journal_entry.dart';
+import 'package:dia_uno/models/entry.dart';
 
 class Journal {
   List<JournalEntry> entries = [];

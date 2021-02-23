@@ -1,9 +1,9 @@
-import 'package:dia_uno/screens/new_journal_entry.dart';
+import 'package:dia_uno/screens/new_entry.dart';
 import 'package:flutter/material.dart';
 
-import './screens/welcome.dart';
-import './screens/new_journal_entry.dart';
-import './screens/journal_entries.dart';
+import 'screens/home.dart';
+import 'screens/new_entry.dart';
+import 'screens/all_entries.dart';
 
 class App extends StatelessWidget {
   @override
