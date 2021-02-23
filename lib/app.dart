@@ -8,6 +8,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Dia Uno',
       home: WelcomeScreen(),
+      theme: ThemeData.dark()
     );
   }
 }
