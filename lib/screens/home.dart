@@ -18,6 +18,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal, 
+        shadowColor: Colors.tealAccent, 
         title: const Text('Dia Uno'),
         actions: [
           Builder(builder: (context) => IconButton(
@@ -33,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.teal,
               ),
               child: Text(
                 'Settings',
@@ -54,7 +56,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Text('Welcome'),
             Icon(
               Icons.book,
-              color: Colors.blue,
+              color: Colors.teal,
               size: 72.0
             )
           ]
@@ -64,6 +66,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         onPressed: () => goToNew(context, 'newJournalEntry'),
         tooltip: 'New Journal Entry',
         child: const Icon(Icons.add),
+        backgroundColor: Colors.teal,
+        focusColor: Colors.tealAccent,
       ),
     );
   }
