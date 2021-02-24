@@ -6,6 +6,15 @@ class JournalEntryForm extends StatefulWidget {
 }
 
 class _JournalEntryFormState extends State<JournalEntryForm> {
+  void saveEntry(BuildContext context) {
+    print("Save new entry");
+    Navigator.of(context).pop();
+  }
+
+  void cancelEntry(BuildContext context) {
+    print("Cancel new entry");
+    Navigator.of(context).pop();
+  }
 
   final _formKey = GlobalKey<FormState>();
 
@@ -42,6 +51,14 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
             firstDate: DateTime.now(),
             lastDate: DateTime.now(),
             
+          ),
+          RaisedButton(
+            onPressed: () => saveEntry(context),
+            child: Text('Save'),
+          ),
+          RaisedButton(
+            onPressed: () => cancelEntry(context),
+            child: Text('Cancel'),
           ),
         ]
       )

@@ -7,9 +7,12 @@ class AllEntiresList extends StatelessWidget {
   final list;
 
   AllEntiresList({Key key, @required this.list});
+
+  // 
   void goToFocusedEntry(context, destination, id) {
-    print("Navigate to main entry page");
     if (destination == 'focusedEntry') {
+      // extracting object data to pass as args
+      // to the focusedEntry route
       Navigator.pushNamed(
         context, 
         'focusedEntry',
@@ -19,9 +22,9 @@ class AllEntiresList extends StatelessWidget {
           body: list[id].body,
           date: list[id].date,
           rating: list[id].rating
-        ));
+        )
+      );
     }
-    print(id);
   }
 
   @override

@@ -8,15 +8,6 @@ class NewJournalEntry extends StatefulWidget {
 }
 
 class _NewJournalEntryState extends State<NewJournalEntry> {
-  void saveEntry(BuildContext context) {
-    print("Saving new entry");
-    Navigator.of(context).pop();
-  }
-
-  void cancelEntry(BuildContext context) {
-    print("Cancel new entry");
-    Navigator.of(context).pop();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +17,7 @@ class _NewJournalEntryState extends State<NewJournalEntry> {
         child: 
           Column(
             children: [
-              JournalEntryForm(),
-              RaisedButton(
-                onPressed: () => saveEntry(context),
-                child: Text('Save'),
-              ),
-              RaisedButton(
-                onPressed: () => cancelEntry(context),
-                child: Text('Cancel'),
-              ),
+              JournalEntryForm()
             ]
           )
         )

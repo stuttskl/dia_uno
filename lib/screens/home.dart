@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import '../widgets/theme_toggle.dart';
 
 class WelcomeScreen extends StatefulWidget {
+  final darkMode;
+  final toggleTheme;
+
+  WelcomeScreen({Key key, this.darkMode, this.toggleTheme}) : super(key: key);
+
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -18,14 +23,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal, 
-        shadowColor: Colors.tealAccent, 
+        backgroundColor: Colors.teal,
+        shadowColor: Colors.tealAccent,
         title: const Text('Dia Uno'),
         actions: [
-          Builder(builder: (context) => IconButton(
-              icon: Icon(Icons.settings), 
-              onPressed: () => Scaffold.of(context).openEndDrawer()
-            ),
+          Builder(
+            builder: (context) => IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () => Scaffold.of(context).openEndDrawer()),
           )
         ],
       ),
@@ -40,28 +45,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               child: Text(
                 'Settings',
                 style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
+                  color: Colors.white,
+                  fontSize: 14,
                 ),
               ),
             ),
-            ThemeToggle()
+            SwitchListTile(
+              title: const Text('Dark Mode'),
+              value: widget.darkMode,
+              onChanged: widget.toggleTheme,
+              secondary: const Icon(Icons.nightlight_round),
+            )
           ],
         ),
       ),
-      body: Center(child: 
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Welcome'),
-            Icon(
-              Icons.book,
-              color: Colors.teal,
-              size: 72.0
-            )
-          ]
-        )
-      ),
+      body: Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('Welcome'),
+        Icon(Icons.book, color: Colors.teal, size: 72.0)
+      ])),
       floatingActionButton: FloatingActionButton(
         onPressed: () => goToNew(context, 'newJournalEntry'),
         tooltip: 'New Journal Entry',
