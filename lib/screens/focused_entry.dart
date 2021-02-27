@@ -10,10 +10,10 @@ class FocusedEntry extends StatelessWidget {
     // extracting args of type Entry using the build context
     final Entry args = ModalRoute.of(context).settings.arguments;
     // converting DateTime obj to string
-    String formattedDate = DateFormat.yMMMMEEEEd().format(args.date);
+    // String formattedDate = DateFormat.yMMMMEEEEd().format(args.date);
 
     return Scaffold(
-      appBar: AppBar(title: Text(formattedDate)),
+      appBar: AppBar(title: Text("HEY THIS IS TEMP")),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
