@@ -14,12 +14,12 @@ class AllEntiresList extends StatelessWidget {
       // extracting object data to pass as args
       // to the focusedEntry route
       Navigator.pushNamed(context, 'focusedEntry',
-          arguments: Entry(
-              id: id,
-              title: list[id].title,
-              body: list[id].body,
-              date: list[id].date,
-              rating: list[id].rating));
+        arguments: Entry(
+          id: list[id].id,
+          title: list[id].title,
+          body: list[id].body,
+          date: list[id].date,
+          rating: list[id].rating));
     }
   }
 
@@ -28,7 +28,7 @@ class AllEntiresList extends StatelessWidget {
     return ListView.builder(
         shrinkWrap: true,
         primary: false,
-        itemCount: 1,
+        itemCount: list.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             title: Text(list[index].title),

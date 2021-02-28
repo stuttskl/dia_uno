@@ -6,34 +6,15 @@ import '../models/journal.dart';
 import '../widgets/all_entries_list.dart';
 
 class JournalEntries extends StatefulWidget {
+  static const routeName = 'allEntries';
+
   @override
   _JournalEntriesState createState() => _JournalEntriesState();
 }
 
 class _JournalEntriesState extends State<JournalEntries> {
-  // Journal journal;
-  AllEntiresList journal;
-  // pull this from db, mock data for now
-  // final List<Entry> entries = [
-  //   Entry(
-  //       id: 0,
-  //       title: 'Entry 0',
-  //       body: 'Some text',
-  //       rating: 4,
-  //       date: DateTime.now()),
-  //   Entry(
-  //       id: 1,
-  //       title: 'Entry 1',
-  //       body: 'Some text',
-  //       rating: 4,
-  //       date: DateTime.now()),
-  //   Entry(
-  //       id: 2,
-  //       title: 'Entry 2',
-  //       body: 'Some text',
-  //       rating: 4,
-  //       date: DateTime.now())
-  // ];
+  Journal journal; // a journal model stores a list of entires of type Entry
+  List<Entry> entries;
 
   @override
   void initState() {
@@ -41,8 +22,21 @@ class _JournalEntriesState extends State<JournalEntries> {
     loadJournal();
   }
 
+  //  void goToFocusedEntry(context, destination, id) {
+  //   if (destination == 'focusedEntry') {
+  //     // extracting object data to pass as args
+  //     // to the focusedEntry route
+  //     Navigator.pushNamed(context, 'focusedEntry',
+  //       arguments: Entry(
+  //         id: list[id].id,
+  //         title: list[id].title,
+  //         body: list[id].body,
+  //         date: list[id].date,
+  //         rating: list[id].rating));
+  //   }
+  // }
+
   void loadJournal() async {
-    // var database = openDatabase('journal.db');
     final Database database = await openDatabase('journal.db', version: 1,
         onCreate: (Database db, int version) async {
       await db.execute(
@@ -52,6 +46,8 @@ class _JournalEntriesState extends State<JournalEntries> {
     // get all journal entries from database
     List<Map> journalRecords =
         await database.rawQuery('SELECT * from journal_entries');
+    print("journal records:");
+    print(journalRecords);
 
     List<Entry> journalEntries = journalRecords.map((record) {
       return Entry(
@@ -62,15 +58,25 @@ class _JournalEntriesState extends State<JournalEntries> {
           date: record['date']);
     }).toList();
 
-    print(journalEntries[0].title);
+    print("journal entries:");
+    print(journalEntries);
+
     setState(() {
-      // journal = Journal(entries: journalEntries);
-      // AllEntriesList(list: journalEntries);
+      journal = Journal(entries: journalEntries);
     });
   }
 
+
   Widget build(BuildContext context) {
-    return Scaffold(
+    if (journal == null) {
+      return Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [CircularProgressIndicator()],
+        ),
+      );
+    } else {
+      return Scaffold(
         appBar: AppBar(title: Text('All Entires')),
         body: LayoutBuilder(builder:
             (BuildContext context, BoxConstraints viewportConstraints) {
@@ -79,10 +85,12 @@ class _JournalEntriesState extends State<JournalEntries> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                // AllEntiresList(list: journalEn),
+                AllEntiresList(list: journal.entries),
               ],
             ),
           );
         }));
+    }
+    
   }
 }

@@ -9,12 +9,8 @@ class JournalEntryFields {
   String body;
   int rating;
   String date;
-  String toString() {
-    return 'Title: $title, Body: $body, Date: $date, Rating: $rating';
-  }
-
   Map<String, dynamic> toMap() {
-    return {'title': title, 'body': body, 'rating': rating};
+    return {'title': title, 'body': body, 'rating': rating, 'date': date};
   }
 }
 
@@ -34,51 +30,25 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
 
       addDateToJournalEntry();
 
-      journalEntryFields.body = "permanent body";
-      print(journalEntryFields);
-
-      // var db = await openDatabase('journal.db');
+      // await deleteDatabase('journal.db');
 
       Database database = await openDatabase('journal.db', version: 1,
           onCreate: (Database db, int version) async {
         await db.execute(
-            'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, body TEXT NOT NULL, rating INTEGER NOT NULL, date TEXT NOT NULL)');
+          'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, body TEXT NOT NULL, rating INTEGER NOT NULL, date TEXT NOT NULL)');
       });
 
-      Future<void> insertEntry(JournalEntryFields entry) async {
-        final Database db = await database;
-        await db.insert('journal_entries', journalEntryFields.toMap());
-      }
+        // this works
+        await database.insert(
+          'journal_entries',
+          journalEntryFields.toMap(),
+        );
 
       // await database.transaction((txn) async {
+      //   print(journalEntryFields.toMap());
       //   await txn.rawInsert(
       //       'INSERT INTO journal_entries(title, body, rating, date) VALUES(?, ?, ?, ?)',
-      //       [journalEntryFields.toMap()]
-      //       // [
-      //       //   journalEntryFields.title,
-      //       //   journalEntryFields.body,
-      //       //   journalEntryFields.rating,
-      //       //   journalEntryFields.date
-      //       // ]
-      //       );
-      // });
-
-      // await deleteDatabase('journal.db'); // until we have the pieces in place
-      // final Database database = await openDatabase('.db/journal.db', version: 1,
-      //     onCreate: (Database db, int version) async {
-      //   await db.execute(
-      //       'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, body TEXT NOT NULL, rating INTEGER NOT NULL, date TEXT NOT NULL)');
-      // });
-
-      // await database.transaction((txn) async {
-      //   await txn.rawInsert(
-      //       'INSERT INTO journal_entries(title, body, rating, date) VALUES(?, ?, ?, ?);',
-      //       [
-      //         journalEntryFields.title,
-      //         journalEntryFields.body,
-      //         journalEntryFields.rating,
-      //         journalEntryFields.date
-      //       ]);
+      //       [journalEntryFields.toMap()]);
       // });
 
       await database.close(); // close db
@@ -156,7 +126,6 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
                     onSaved: (value) {
                       // store objs
                       journalEntryFields.rating = value;
-                      print(journalEntryFields.rating);
                     },
                   ),
                   SizedBox(height: 20),

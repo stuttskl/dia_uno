@@ -36,7 +36,8 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     var routes = {
       NewJournalEntry.routeName: (context) => NewJournalEntry(),
-      FocusedEntry.routeName: (context) => FocusedEntry()
+      FocusedEntry.routeName: (context) => FocusedEntry(),
+      JournalEntries.routeName: (context) => JournalEntries()
     };
 
     return MaterialApp(
@@ -44,8 +45,8 @@ class _AppState extends State<App> {
         title: 'Dia Uno',
         // home: list.length == 0 ? WelcomeScreen() : JournalEntries(),
         // pass the darkMode const and toggleTheme method to welcome screen
-        home: JournalEntries(),
-        // home: WelcomeScreen(darkMode: darkTheme, toggleTheme: toggleTheme),
+        // home: JournalEntries(),
+        home: WelcomeScreen(darkMode: darkTheme, toggleTheme: toggleTheme),
         // teranary expression to set the theme based on if darkTheme has been set
         theme: darkTheme ? ThemeData.dark() : ThemeData.light());
   }

@@ -19,6 +19,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     }
   }
 
+  goToAllEntries(context, destination) {
+    if (destination == 'allEntries') {
+      Navigator.pushNamed(context, 'allEntries');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,10 +66,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
       ),
       body: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Text('Welcome'),
-        Icon(Icons.book, color: Colors.teal, size: 72.0)
-      ])),
+          child: 
+          Column(mainAxisAlignment: MainAxisAlignment.center, 
+            children: [
+              Text('Welcome'),
+              Icon(Icons.book, color: Colors.teal, size: 72.0),
+              RaisedButton(onPressed: () => goToAllEntries(context, 'allEntries'))
+            ]
+          )
+        ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => goToNew(context, 'newJournalEntry'),
         tooltip: 'New Journal Entry',
