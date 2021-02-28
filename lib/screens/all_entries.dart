@@ -23,15 +23,15 @@ class _JournalEntriesState extends State<JournalEntries> {
   }
 
   goToNew(context, destination) {
-      print("Going to new entry page");
-      if (destination == 'newJournalEntry') {
-        Navigator.pushNamed(context, 'newJournalEntry');
-      }
+    print("Going to new entry page");
+    if (destination == 'newJournalEntry') {
+      Navigator.pushNamed(context, 'newJournalEntry');
     }
+  }
 
   void loadJournal() async {
-    final Database database = await openDatabase('journal.sqlite3.db', version: 1,
-        onCreate: (Database db, int version) async {
+    final Database database = await openDatabase('journal.sqlite3.db',
+        version: 1, onCreate: (Database db, int version) async {
       await db.execute(
           'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, body TEXT NOT NULL, rating INTEGER NOT NULL, date TEXT NOT NULL');
     });
@@ -59,7 +59,6 @@ class _JournalEntriesState extends State<JournalEntries> {
     });
   }
 
-
   Widget build(BuildContext context) {
     if (journal == null) {
       return Container(
@@ -74,23 +73,22 @@ class _JournalEntriesState extends State<JournalEntries> {
         body: LayoutBuilder(builder:
             (BuildContext context, BoxConstraints viewportConstraints) {
           return SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                AllEntiresList(list: journal.entries),
-                FloatingActionButton(
-                  onPressed: () => goToNew(context, 'newJournalEntry'),
-                  tooltip: 'New Journal Entry',
-                  child: const Icon(Icons.add),
-                  backgroundColor: Colors.teal,
-                  focusColor: Colors.tealAccent,
-                ),
-              ],
-            ),
-          );
-        }));
+              child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              AllEntiresList(list: journal.entries),
+            ],
+          ));
+        }),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => goToNew(context, 'newJournalEntry'),
+          tooltip: 'New Journal Entry',
+          child: const Icon(Icons.add),
+          backgroundColor: Colors.teal,
+          focusColor: Colors.tealAccent,
+        ),
+      );
     }
-    
   }
 }

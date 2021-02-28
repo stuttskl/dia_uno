@@ -1,15 +1,12 @@
-import 'package:dia_uno/models/journal.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../models/entry.dart';
-import '../models/journal.dart';
 
 class AllEntiresList extends StatelessWidget {
   final List<Entry> list;
 
   AllEntiresList({Key key, @required this.list});
 
-  void goToFocusedEntry(context, destination, id) { // the id seems to only be 0 
+  void goToFocusedEntry(context, destination, id) { 
     print("inside of focusedEntry, id is: " + id.toString());
     if (destination == 'focusedEntry') {
       // extracting object data to pass as args
