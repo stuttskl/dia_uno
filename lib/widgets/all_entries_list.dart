@@ -35,7 +35,7 @@ class AllEntiresList extends StatelessWidget {
             title: Text(list[index].title),
             subtitle: Text(list[index].date),
             onTap: () =>
-                goToFocusedEntry(context, 'focusedEntry', list[index].id), // change this
+                goToFocusedEntry(context, 'focusedEntry', list[index].id -1), // this needs to be -1...
           );
         });
   }

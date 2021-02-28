@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/drop_down_rating.dart';
 import 'package:sqflite/sqflite.dart';
-import '../db/entry_dto.dart';
 
 // data transfer object
 class JournalEntryFields {
