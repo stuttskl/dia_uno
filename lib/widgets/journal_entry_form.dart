@@ -20,7 +20,8 @@ class JournalEntryForm extends StatefulWidget {
 
 class _JournalEntryFormState extends State<JournalEntryForm> {
   void addDateToJournalEntry() {
-    journalEntryFields.date = "YYYY-MM-DD HH:MM:SS.SSS";
+    journalEntryFields.date = DateTime.now().toIso8601String();
+    // print("setting date: " + journalEntryFields.date);
   }
 
   void saveEntry(BuildContext context) async {
