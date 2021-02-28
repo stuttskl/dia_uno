@@ -30,19 +30,20 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
 
       addDateToJournalEntry();
 
-      // await deleteDatabase('journal.db');
+      // await deleteDatabase('journal.sqlite3.db');
+      // print("database deleted");
 
-      Database database = await openDatabase('journal.db', version: 1,
+      Database database = await openDatabase('journal.sqlite3.db', version: 1,
           onCreate: (Database db, int version) async {
         await db.execute(
-          'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, body TEXT NOT NULL, rating INTEGER NOT NULL, date TEXT NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, body TEXT NOT NULL, rating INTEGER NOT NULL, date TEXT NOT NULL)');
       });
 
-        // this works
-        await database.insert(
-          'journal_entries',
-          journalEntryFields.toMap(),
-        );
+      // this works
+      await database.insert(
+        'journal_entries',
+        journalEntryFields.toMap(),
+      );
 
       // await database.transaction((txn) async {
       //   print(journalEntryFields.toMap());
@@ -86,7 +87,6 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
                     onSaved: (value) {
                       // store value in some object
                       journalEntryFields.title = value;
-                      // print(journalEntryFields.title);
                     },
                     validator: (value) {
                       if (value.isEmpty) {
@@ -117,12 +117,6 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
                   SizedBox(height: 20),
                   DropdownRatingFormField(
                     maxRating: 4,
-                    // validator: (value) {
-                    //   if (value.isEmpty) {
-                    //     return 'Please enter some text';
-                    //   }
-                    //   return null;
-                    // },
                     onSaved: (value) {
                       // store objs
                       journalEntryFields.rating = value;

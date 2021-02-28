@@ -22,22 +22,15 @@ class _JournalEntriesState extends State<JournalEntries> {
     loadJournal();
   }
 
-  //  void goToFocusedEntry(context, destination, id) {
-  //   if (destination == 'focusedEntry') {
-  //     // extracting object data to pass as args
-  //     // to the focusedEntry route
-  //     Navigator.pushNamed(context, 'focusedEntry',
-  //       arguments: Entry(
-  //         id: list[id].id,
-  //         title: list[id].title,
-  //         body: list[id].body,
-  //         date: list[id].date,
-  //         rating: list[id].rating));
-  //   }
-  // }
+  goToNew(context, destination) {
+      print("Going to new entry page");
+      if (destination == 'newJournalEntry') {
+        Navigator.pushNamed(context, 'newJournalEntry');
+      }
+    }
 
   void loadJournal() async {
-    final Database database = await openDatabase('journal.db', version: 1,
+    final Database database = await openDatabase('journal.sqlite3.db', version: 1,
         onCreate: (Database db, int version) async {
       await db.execute(
           'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, body TEXT NOT NULL, rating INTEGER NOT NULL, date TEXT NOT NULL');
@@ -86,6 +79,13 @@ class _JournalEntriesState extends State<JournalEntries> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 AllEntiresList(list: journal.entries),
+                FloatingActionButton(
+                  onPressed: () => goToNew(context, 'newJournalEntry'),
+                  tooltip: 'New Journal Entry',
+                  child: const Icon(Icons.add),
+                  backgroundColor: Colors.teal,
+                  focusColor: Colors.tealAccent,
+                ),
               ],
             ),
           );

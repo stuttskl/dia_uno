@@ -9,17 +9,18 @@ class AllEntiresList extends StatelessWidget {
 
   AllEntiresList({Key key, @required this.list});
 
-  void goToFocusedEntry(context, destination, id) {
+  void goToFocusedEntry(context, destination, id) { // the id seems to only be 0 
+    print("inside of focusedEntry, id is: " + id.toString());
     if (destination == 'focusedEntry') {
       // extracting object data to pass as args
       // to the focusedEntry route
       Navigator.pushNamed(context, 'focusedEntry',
-        arguments: Entry(
-          id: list[id].id,
-          title: list[id].title,
-          body: list[id].body,
-          date: list[id].date,
-          rating: list[id].rating));
+          arguments: Entry(
+              id: id,
+              title: list[id].title,
+              body: list[id].body,
+              date: list[id].date,
+              rating: list[id].rating));
     }
   }
 
@@ -34,7 +35,7 @@ class AllEntiresList extends StatelessWidget {
             title: Text(list[index].title),
             subtitle: Text(list[index].date),
             onTap: () =>
-                goToFocusedEntry(context, 'focusedEntry', list[index].id),
+                goToFocusedEntry(context, 'focusedEntry', list[index].id), // change this
           );
         });
   }
