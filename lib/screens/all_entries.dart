@@ -23,7 +23,7 @@ class _JournalEntriesState extends State<JournalEntries> {
   }
 
   goToNew(context, destination) {
-    print("Going to new entry page");
+    // print("Going to new entry page");
     if (destination == 'newJournalEntry') {
       Navigator.pushNamed(context, 'newJournalEntry');
     }
@@ -39,8 +39,8 @@ class _JournalEntriesState extends State<JournalEntries> {
     // get all journal entries from database
     List<Map> journalRecords =
         await database.rawQuery('SELECT * from journal_entries');
-    print("journal records:");
-    print(journalRecords);
+    // print("journal records:");
+    // print(journalRecords);
 
     List<Entry> journalEntries = journalRecords.map((record) {
       return Entry(
@@ -51,8 +51,8 @@ class _JournalEntriesState extends State<JournalEntries> {
           date: record['date']);
     }).toList();
 
-    print("journal entries:");
-    print(journalEntries);
+    // print("journal entries:");
+    // print(journalEntries);
 
     setState(() {
       journal = Journal(entries: journalEntries);
@@ -73,13 +73,14 @@ class _JournalEntriesState extends State<JournalEntries> {
         body: LayoutBuilder(builder:
             (BuildContext context, BoxConstraints viewportConstraints) {
           return SingleChildScrollView(
-              child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              AllEntiresList(list: journal.entries),
-            ],
-          ));
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                AllEntiresList(list: journal.entries),
+              ],
+            )
+          );
         }),
         floatingActionButton: FloatingActionButton(
           onPressed: () => goToNew(context, 'newJournalEntry'),

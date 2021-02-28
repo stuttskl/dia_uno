@@ -53,7 +53,7 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
 
       await database.close(); // close db
 
-      print("valid, saving to database?");
+      // print("valid, saving to database?");
       Navigator.of(context).pop(); // pop back to screen
     } else {
       print("invalid, not saving");
@@ -61,7 +61,7 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
   }
 
   void cancelEntry(BuildContext context) {
-    print("Cancel new entry");
+    // print("Cancel new entry");
     Navigator.of(context).pop();
   }
 

@@ -7,7 +7,7 @@ class AllEntiresList extends StatelessWidget {
   AllEntiresList({Key key, @required this.list});
 
   void goToFocusedEntry(context, destination, id) { 
-    print("inside of focusedEntry, id is: " + id.toString());
+    // print("inside of focusedEntry, id is: " + id.toString());
     if (destination == 'focusedEntry') {
       // extracting object data to pass as args
       // to the focusedEntry route
