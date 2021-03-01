@@ -24,12 +24,12 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
 
       addDateToJournalEntryValues();
 
-      //   // await deleteDatabase('journal.sqlite3.db');
+      await deleteDatabase('journal.sqlite3.db');
 
       Database database = await openDatabase('journal.sqlite3.db', version: 1,
           onCreate: (Database db, int version) async {
         await db.execute(
-            'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, body TEXT NOT NULL, rating INTEGER NOT NULL, date TEXT NOT NULL);');
+            'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, body TEXT NOT NULL, rating INTEGER NOT NULL, dateTime TEXT NOT NULL);');
       });
 
       print("database created!?");

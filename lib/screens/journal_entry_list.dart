@@ -45,7 +45,7 @@ class _JournalEntriesState extends State<JournalEntries> {
         title: record['title'],
         body: record['body'],
         rating: record['rating'],
-        dateTime: DateTime.parse(record['date'])
+        dateTime: DateTime.parse(record['dateTime'])
       );
     }).toList();
 

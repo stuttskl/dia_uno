@@ -12,7 +12,7 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  
+
   goToNew(context, destination) {
     print("Going to new entry page");
     if (destination == 'newJournalEntry') {
@@ -23,8 +23,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   goToAllEntries(context, destination) {
     print("Going to all entries list?");
     print("it seems to be crashing here?");
-    if (destination == 'alpha') {
-      Navigator.pushNamed(context, 'alpha');
+    if (destination == 'allEntries') {
+      Navigator.pushNamed(context, 'allEntries');
     }
     print("after navigator to allEntries");
   }
@@ -73,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Welcome'),
         Icon(Icons.book, color: Colors.teal, size: 72.0),
-        RaisedButton(onPressed: () => goToAllEntries(context, 'alpha'))
+        RaisedButton(onPressed: () => goToAllEntries(context, 'allEntries'))
       ])),
       floatingActionButton: FloatingActionButton(
         onPressed: () => goToNew(context, 'newJournalEntry'),
