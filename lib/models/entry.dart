@@ -1,9 +1,9 @@
-class Entry {
+class Entry{
   final int id;
   final String title;
   final String body;
   final int rating;
-  final String date;
+  final DateTime dateTime;
 
-  Entry({this.id, this.title, this.body, this.rating, this.date});
+  Entry({this.id, this.title, this.body, this.rating, this.dateTime});
 }

@@ -35,8 +35,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         actions: [
           Builder(
             builder: (context) => IconButton(
-                icon: Icon(Icons.settings),
-                onPressed: () => Scaffold.of(context).openEndDrawer()),
+              icon: Icon(Icons.settings),
+              onPressed: () => Scaffold.of(context).openEndDrawer()),
           )
         ],
       ),

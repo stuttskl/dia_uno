@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/entry.dart';
 
+
 class AllEntiresList extends StatelessWidget {
   final List<Entry> list;
 
@@ -16,7 +17,7 @@ class AllEntiresList extends StatelessWidget {
               id: id,
               title: list[id].title,
               body: list[id].body,
-              date: list[id].date,
+              dateTime: list[id].dateTime,
               rating: list[id].rating));
     }
   }
@@ -30,7 +31,7 @@ class AllEntiresList extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             title: Text(list[index].title),
-            subtitle: Text(list[index].date),
+            subtitle: Text(DateTime.parse(list[index].dateTime.toString()).toString()),
             onTap: () =>
                 goToFocusedEntry(context, 'focusedEntry', list[index].id -1), // this needs to be -1...
           );

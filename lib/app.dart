@@ -4,14 +4,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screens/home.dart';
 import 'screens/new_entry.dart';
-import 'screens/all_entries.dart';
-import 'screens/focused_entry.dart';
+import 'screens/journal_entry_list.dart';
+import 'screens/journal_entry.dart';
 
 class App extends StatefulWidget {
   // SharedPreferences object to store user preferences
   final SharedPreferences preferences;
+  final String createQuery;
 
-  App({Key key, @required this.preferences}) : super(key: key);
+  App({Key key, @required this.preferences, this.createQuery}) : super(key: key);
 
   @override
   _AppState createState() => _AppState();
@@ -36,7 +37,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     var routes = {
       NewJournalEntry.routeName: (context) => NewJournalEntry(),
-      FocusedEntry.routeName: (context) => FocusedEntry(),
+      JournalEntry.routeName: (context) => JournalEntry(),
       JournalEntries.routeName: (context) => JournalEntries()
     };
 
@@ -45,12 +46,9 @@ class _AppState extends State<App> {
         title: 'Dia Uno',
         // home: list.length == 0 ? WelcomeScreen() : JournalEntries(),
         // pass the darkMode const and toggleTheme method to welcome screen
-        // home: JournalEntries(),
-        home: WelcomeScreen(darkMode: darkTheme, toggleTheme: toggleTheme),
-        // teranary expression to set the theme based on if darkTheme has been set
+        home: JournalEntries(),
+        // home: WelcomeScreen(darkMode: darkTheme, toggleTheme: toggleTheme) ,
         theme: darkTheme ? ThemeData.dark() : ThemeData.light());
   }
 
 }
-// TODO:
-// [] only render welcome page if there are no journal entries

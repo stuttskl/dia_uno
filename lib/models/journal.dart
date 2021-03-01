@@ -5,6 +5,4 @@ class Journal {
 
   // Journal is a list of type Entry consisting of a list called entries... lol
   Journal({List<Entry> entries = const <Entry>[]}) : this.entries = entries;
-
-  
 }

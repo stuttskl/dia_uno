@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter/services.dart';
 
 import '../models/entry.dart';
 import '../models/journal.dart';
 import '../widgets/all_entries_list.dart';
+
+// const CREATE_DB_QUERY = '../assets/schema_1.sql.text';
 
 class JournalEntries extends StatefulWidget {
   static const routeName = 'allEntries';
@@ -13,8 +16,9 @@ class JournalEntries extends StatefulWidget {
 }
 
 class _JournalEntriesState extends State<JournalEntries> {
-  Journal journal; // a journal model stores a list of entires of type Entry
+  Journal journal;
   List<Entry> entries;
+  String createQuery;
 
   @override
   void initState() {
@@ -23,7 +27,6 @@ class _JournalEntriesState extends State<JournalEntries> {
   }
 
   goToNew(context, destination) {
-    // print("Going to new entry page");
     if (destination == 'newJournalEntry') {
       Navigator.pushNamed(context, 'newJournalEntry');
     }
@@ -32,15 +35,12 @@ class _JournalEntriesState extends State<JournalEntries> {
   void loadJournal() async {
     final Database database = await openDatabase('journal.sqlite3.db',
         version: 1, onCreate: (Database db, int version) async {
-      await db.execute(
-          'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, body TEXT NOT NULL, rating INTEGER NOT NULL, date TEXT NOT NULL');
+      await db.execute(createQuery);
     });
 
     // get all journal entries from database
     List<Map> journalRecords =
         await database.rawQuery('SELECT * from journal_entries');
-    // print("journal records:");
-    // print(journalRecords);
 
     List<Entry> journalEntries = journalRecords.map((record) {
       return Entry(
@@ -48,17 +48,15 @@ class _JournalEntriesState extends State<JournalEntries> {
           title: record['title'],
           body: record['body'],
           rating: record['rating'],
-          date: record['date']);
+          dateTime: DateTime.parse(record['dateTime']));
     }).toList();
-
-    // print("journal entries:");
-    // print(journalEntries);
 
     setState(() {
       journal = Journal(entries: journalEntries);
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     if (journal == null) {
       return Container(
@@ -73,14 +71,13 @@ class _JournalEntriesState extends State<JournalEntries> {
         body: LayoutBuilder(builder:
             (BuildContext context, BoxConstraints viewportConstraints) {
           return SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                AllEntiresList(list: journal.entries),
-              ],
-            )
-          );
+              child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              AllEntiresList(list: journal.entries),
+            ],
+          ));
         }),
         floatingActionButton: FloatingActionButton(
           onPressed: () => goToNew(context, 'newJournalEntry'),
