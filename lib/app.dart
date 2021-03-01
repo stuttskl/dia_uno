@@ -1,4 +1,5 @@
 import 'package:dia_uno/screens/new_entry.dart';
+import 'package:dia_uno/widgets/journal_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,7 +47,8 @@ class _AppState extends State<App> {
     return MaterialApp(
       routes: routes,
       title: 'Dia Uno',
-      home: WelcomeScreen(darkMode: darkTheme, toggleTheme: toggleTheme),
+      home: JournalEntries(createQuery: 'hi', darkMode: darkTheme, toggleTheme: toggleTheme),
+      // home: JournalScaffold(darkMode: darkTheme, toggleTheme: toggleTheme),
       theme: darkTheme ? ThemeData.dark() : ThemeData.light());
   }
 }
