@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:flutter/services.dart';
 
 import '../models/entry.dart';
 import '../models/journal.dart';
 import '../widgets/all_entries_list.dart';
-
-// const CREATE_DB_QUERY = '../assets/schema_1.sql.text';
 
 class JournalEntries extends StatefulWidget {
   static const routeName = 'allEntries';
@@ -49,7 +45,7 @@ class _JournalEntriesState extends State<JournalEntries> {
         title: record['title'],
         body: record['body'],
         rating: record['rating'],
-        dateTime: DateTime.parse(record['dateTime'])
+        dateTime: DateTime.parse(record['date'])
       );
     }).toList();
 
@@ -64,7 +60,7 @@ class _JournalEntriesState extends State<JournalEntries> {
       return Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [CircularProgressIndicator()],
+          children: [Text('Loading...')],
         ),
       );
     } else {
@@ -77,7 +73,7 @@ class _JournalEntriesState extends State<JournalEntries> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              AllEntiresList(list: journal.entries),
+              AllEntriesList(list: journal.entries),
             ],
           ));
         }),

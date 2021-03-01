@@ -6,6 +6,7 @@ import 'screens/home.dart';
 import 'screens/new_entry.dart';
 import 'screens/journal_entry_list.dart';
 import 'screens/journal_entry.dart';
+import 'screens/alpha.dart';
 
 class App extends StatefulWidget {
   // SharedPreferences object to store user preferences
@@ -38,16 +39,14 @@ class _AppState extends State<App> {
     var routes = {
       NewJournalEntry.routeName: (context) => NewJournalEntry(),
       JournalEntry.routeName: (context) => JournalEntry(),
-      JournalEntries.routeName: (context) => JournalEntries()
+      JournalEntries.routeName: (context) => JournalEntries(),
+      Alpha.routeName: (context) => Alpha()
     };
 
     return MaterialApp(
         routes: routes,
         title: 'Dia Uno',
-        // home: list.length == 0 ? WelcomeScreen() : JournalEntries(),
-        // pass the darkMode const and toggleTheme method to welcome screen
-        home: JournalEntries(),
-        // home: WelcomeScreen(darkMode: darkTheme, toggleTheme: toggleTheme) ,
+        home: WelcomeScreen(darkMode: darkTheme, toggleTheme: toggleTheme) ,
         theme: darkTheme ? ThemeData.dark() : ThemeData.light());
   }
 

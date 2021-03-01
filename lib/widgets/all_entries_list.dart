@@ -3,10 +3,10 @@ import 'package:intl/intl.dart';
 import '../models/entry.dart';
 
 
-class AllEntiresList extends StatelessWidget {
+class AllEntriesList extends StatelessWidget {
   final List<Entry> list;
 
-  AllEntiresList({Key key, @required this.list});
+  AllEntriesList({Key key, @required this.list});
 
   void goToFocusedEntry(context, destination, id) { 
     // print("inside of focusedEntry, id is: " + id.toString());
@@ -25,19 +25,17 @@ class AllEntiresList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // String formattedDate = DateTime.parse(list[index].dateTime.toString()).toString();
-
     return ListView.builder(
-        shrinkWrap: true,
-        primary: false,
-        itemCount: list.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text(list[index].title),
-            subtitle: Text(DateFormat('yMMMMEEEEd').format(DateTime.parse(list[index].dateTime.toString()))),
-            onTap: () =>
-                goToFocusedEntry(context, 'focusedEntry', list[index].id -1), // this needs to be -1...
-          );
-        });
+      shrinkWrap: true,
+      primary: false,
+      itemCount: list.length,
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          title: Text(list[index].title),
+          subtitle: Text(DateFormat('yMMMMEEEEd').format(DateTime.parse(list[index].dateTime.toString()))),
+          onTap: () =>
+              goToFocusedEntry(context, 'focusedEntry', list[index].id -1), // this needs to be -1...
+        );
+      });
   }
 }
