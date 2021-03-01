@@ -14,33 +14,29 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
   goToNew(context, destination) {
-    print("Going to new entry page");
+    // print("Going to new entry page");
     if (destination == 'newJournalEntry') {
       Navigator.pushNamed(context, 'newJournalEntry');
     }
   }
 
   goToAllEntries(context, destination) {
-    print("Going to all entries list?");
-    print("it seems to be crashing here?");
+    // print("Going to all entries list?");
     if (destination == 'allEntries') {
       Navigator.pushNamed(context, 'allEntries');
     }
-    print("after navigator to allEntries");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Colors.teal,
-        // shadowColor: Colors.tealAccent,
         title: const Text('Dia Uno'),
         actions: [
           Builder(
             builder: (context) => IconButton(
-                icon: Icon(Icons.settings),
-                onPressed: () => Scaffold.of(context).openEndDrawer()),
+              icon: Icon(Icons.settings),
+              onPressed: () => Scaffold.of(context).openEndDrawer()),
           )
         ],
       ),
@@ -79,8 +75,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         onPressed: () => goToNew(context, 'newJournalEntry'),
         tooltip: 'New Journal Entry',
         child: const Icon(Icons.add),
-        // backgroundColor: Colors.teal,
-        // focusColor: Colors.tealAccent,
       ),
     );
   }

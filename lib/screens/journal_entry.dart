@@ -19,9 +19,18 @@ class JournalEntry extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Title: " + args.title),
-            Text("Body: " + args.body),
-            Text("Rating: " + args.rating.toString())
+            RichText(
+              text: TextSpan(
+                text: args.title,
+                style: Theme.of(context).textTheme.headline3,
+              ),
+            ),
+            RichText(
+              text: TextSpan(
+                text: args.body,
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            ),
           ],
         )
       )

@@ -36,8 +36,6 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    // print('in app, createQuery: ');
-    // print(widget.createQuery);
     var routes = {
       NewJournalEntry.routeName: (context) => NewJournalEntry(createQuery: widget.createQuery),
       JournalEntry.routeName: (context) => JournalEntry(createQuery: widget.createQuery),
@@ -46,9 +44,9 @@ class _AppState extends State<App> {
     };
 
     return MaterialApp(
-        routes: routes,
-        title: 'Dia Uno',
-        home: WelcomeScreen(darkMode: darkTheme, toggleTheme: toggleTheme),
-        theme: darkTheme ? ThemeData.dark() : ThemeData.light());
+      routes: routes,
+      title: 'Dia Uno',
+      home: WelcomeScreen(darkMode: darkTheme, toggleTheme: toggleTheme),
+      theme: darkTheme ? ThemeData.dark() : ThemeData.light());
   }
 }
