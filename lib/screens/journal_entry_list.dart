@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/services.dart';
 
@@ -44,11 +45,12 @@ class _JournalEntriesState extends State<JournalEntries> {
 
     List<Entry> journalEntries = journalRecords.map((record) {
       return Entry(
-          id: record['id'],
-          title: record['title'],
-          body: record['body'],
-          rating: record['rating'],
-          dateTime: DateTime.parse(record['dateTime']));
+        id: record['id'],
+        title: record['title'],
+        body: record['body'],
+        rating: record['rating'],
+        dateTime: DateTime.parse(record['dateTime'])
+      );
     }).toList();
 
     setState(() {
