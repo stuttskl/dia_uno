@@ -69,7 +69,7 @@ class _JournalEntriesState extends State<JournalEntries> {
       return Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text('Loading...')],
+          children: [CircularProgressIndicator()],
         ),
       );
     } else {
