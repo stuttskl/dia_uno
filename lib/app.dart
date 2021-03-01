@@ -6,14 +6,14 @@ import 'screens/home.dart';
 import 'screens/new_entry.dart';
 import 'screens/journal_entry_list.dart';
 import 'screens/journal_entry.dart';
-import 'screens/alpha.dart';
 
 class App extends StatefulWidget {
   // SharedPreferences object to store user preferences
   final SharedPreferences preferences;
   final String createQuery;
 
-  App({Key key, @required this.preferences, this.createQuery}) : super(key: key);
+  App({Key key, @required this.preferences, this.createQuery})
+      : super(key: key);
 
   @override
   _AppState createState() => _AppState();
@@ -36,18 +36,19 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    // print('in app, createQuery: ');
+    // print(widget.createQuery);
     var routes = {
-      NewJournalEntry.routeName: (context) => NewJournalEntry(),
-      JournalEntry.routeName: (context) => JournalEntry(),
-      JournalEntries.routeName: (context) => JournalEntries(),
-      Alpha.routeName: (context) => Alpha()
+      NewJournalEntry.routeName: (context) => NewJournalEntry(createQuery: widget.createQuery),
+      JournalEntry.routeName: (context) => JournalEntry(createQuery: widget.createQuery),
+      JournalEntries.routeName: (context) =>
+      JournalEntries(createQuery: widget.createQuery),
     };
 
     return MaterialApp(
         routes: routes,
         title: 'Dia Uno',
-        home: WelcomeScreen(darkMode: darkTheme, toggleTheme: toggleTheme) ,
+        home: WelcomeScreen(darkMode: darkTheme, toggleTheme: toggleTheme),
         theme: darkTheme ? ThemeData.dark() : ThemeData.light());
   }
-
 }

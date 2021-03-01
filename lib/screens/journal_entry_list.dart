@@ -1,3 +1,4 @@
+import 'package:dia_uno/main.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -7,6 +8,9 @@ import '../widgets/all_entries_list.dart';
 
 class JournalEntries extends StatefulWidget {
   static const routeName = 'allEntries';
+  final createQuery;
+
+  JournalEntries({Key key, @required this.createQuery});
 
   @override
   _JournalEntriesState createState() => _JournalEntriesState();
@@ -30,9 +34,13 @@ class _JournalEntriesState extends State<JournalEntries> {
   }
 
   void loadJournal() async {
+    // print('create query in journal_entry_list.dart: ');
+    // print(widget.createQuery);
+
     final Database database = await openDatabase('journal.sqlite3.db',
         version: 1, onCreate: (Database db, int version) async {
-      await db.execute(createQuery);
+      await db.execute(
+          widget.createQuery);
     });
 
     // get all journal entries from database
@@ -41,12 +49,11 @@ class _JournalEntriesState extends State<JournalEntries> {
 
     List<Entry> journalEntries = journalRecords.map((record) {
       return Entry(
-        id: record['id'],
-        title: record['title'],
-        body: record['body'],
-        rating: record['rating'],
-        dateTime: DateTime.parse(record['dateTime'])
-      );
+          id: record['id'],
+          title: record['title'],
+          body: record['body'],
+          rating: record['rating'],
+          dateTime: DateTime.parse(record['dateTime']));
     }).toList();
 
     setState(() {
@@ -56,6 +63,8 @@ class _JournalEntriesState extends State<JournalEntries> {
 
   @override
   Widget build(BuildContext context) {
+    // print('create query in journal_entry_list.dart: ');
+    // print(widget.createQuery);
     if (journal == null) {
       return Container(
         child: Column(

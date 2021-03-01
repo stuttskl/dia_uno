@@ -3,6 +3,9 @@ import '../widgets/journal_entry_form.dart';
 
 class NewJournalEntry extends StatefulWidget {
   static const routeName = 'newJournalEntry';
+  final createQuery;
+
+  NewJournalEntry({Key key, @required this.createQuery});
   @override
   _NewJournalEntryState createState() => _NewJournalEntryState();
 }
@@ -17,7 +20,7 @@ class _NewJournalEntryState extends State<NewJournalEntry> {
         child: 
           Column(
             children: [
-              JournalEntryForm()
+              JournalEntryForm(createQuery: widget.createQuery)
             ]
           )
         )

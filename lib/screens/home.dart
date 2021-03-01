@@ -4,15 +4,15 @@ import '../widgets/theme_toggle.dart';
 class WelcomeScreen extends StatefulWidget {
   final darkMode;
   final toggleTheme;
+  final createQuery;
 
-  WelcomeScreen({Key key, this.darkMode, this.toggleTheme}) : super(key: key);
+  WelcomeScreen({Key key, this.darkMode, this.toggleTheme, this.createQuery}) : super(key: key);
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-
   goToNew(context, destination) {
     print("Going to new entry page");
     if (destination == 'newJournalEntry') {
@@ -33,8 +33,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
-        shadowColor: Colors.tealAccent,
+        // backgroundColor: Colors.teal,
+        // shadowColor: Colors.tealAccent,
         title: const Text('Dia Uno'),
         actions: [
           Builder(
@@ -50,7 +50,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.teal,
+                color: Colors.blue,
               ),
               child: Text(
                 'Settings',
@@ -72,15 +72,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Text('Welcome'),
-        Icon(Icons.book, color: Colors.teal, size: 72.0),
+        Icon(Icons.book, size: 72.0),
         RaisedButton(onPressed: () => goToAllEntries(context, 'allEntries'))
       ])),
       floatingActionButton: FloatingActionButton(
         onPressed: () => goToNew(context, 'newJournalEntry'),
         tooltip: 'New Journal Entry',
         child: const Icon(Icons.add),
-        backgroundColor: Colors.teal,
-        focusColor: Colors.tealAccent,
+        // backgroundColor: Colors.teal,
+        // focusColor: Colors.tealAccent,
       ),
     );
   }

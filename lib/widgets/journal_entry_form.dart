@@ -4,6 +4,9 @@ import 'package:sqflite/sqflite.dart';
 import '../db/journal_entry_dto.dart';
 
 class JournalEntryForm extends StatefulWidget {
+  final createQuery;
+
+  JournalEntryForm({Key key, this.createQuery});
   @override
   _JournalEntryFormState createState() => _JournalEntryFormState();
 }
@@ -11,7 +14,7 @@ class JournalEntryForm extends StatefulWidget {
 class _JournalEntryFormState extends State<JournalEntryForm> {
   final _formKey = GlobalKey<FormState>();
   final journalEntryValues = JournalEntryDTO();
-  String createQuery;
+  
 
   void addDateToJournalEntryValues() {
     journalEntryValues.dateTime = DateTime.now().toIso8601String();
@@ -24,7 +27,9 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
 
       addDateToJournalEntryValues();
 
-      await deleteDatabase('journal.sqlite3.db');
+      // await deleteDatabase('journal.sqlite3.db');
+      print('create query in journal_entry_form: ');
+      print(widget.createQuery);
 
       Database database = await openDatabase('journal.sqlite3.db', version: 1,
           onCreate: (Database db, int version) async {
@@ -34,12 +39,12 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
 
       print("database created!?");
 
-        await database.insert(
-          'journal_entries',
-          journalEntryValues.toMap(),
-        );
+      await database.insert(
+        'journal_entries',
+        journalEntryValues.toMap(),
+      );
 
-        print('saving journal entry');
+      print('saving journal entry');
       await database.close(); // close db
 
       Navigator.of(context).pop();

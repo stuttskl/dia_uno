@@ -3,6 +3,9 @@ import '../models/entry.dart';
 
 class JournalEntry extends StatelessWidget {
   static const routeName = 'focusedEntry';
+  final createQuery;
+
+  JournalEntry({Key key, @required this.createQuery});
 
   @override
   Widget build(BuildContext context) {
