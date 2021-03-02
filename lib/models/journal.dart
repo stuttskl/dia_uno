@@ -6,6 +6,7 @@ class Journal {
   int get numberOfEntries => entries.length;
   bool get isEmpty => entries.isEmpty;
 
+  // returns an instance of an entry for a specified index
   Entry getEntry(int index) {
     return entries[index];
   }

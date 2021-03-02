@@ -31,6 +31,12 @@ class JournalEntry extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText2,
               ),
             ),
+            RichText(
+              text: TextSpan(
+                text: 'Rating: ' + args.rating.toString(),
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            ),
           ],
         )
       )

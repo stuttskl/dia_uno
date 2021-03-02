@@ -21,30 +21,30 @@ class _JournalEntryFormState extends State<JournalEntryForm> {
   }
 
   void saveEntry(BuildContext context) async {
-    print('inside of saveEntry in journalEntryForm');
+    // print('inside of saveEntry in journalEntryForm');
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
 
       addDateToJournalEntryValues();
 
       // await deleteDatabase('journal.sqlite3.db');
-      print('create query in journal_entry_form: ');
-      print(widget.createQuery);
+      // print('create query in journal_entry_form: ');
+      // print(widget.createQuery);
 
       Database database = await openDatabase('journal.sqlite3.db', version: 1,
           onCreate: (Database db, int version) async {
         await db.execute(
-            'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, body TEXT NOT NULL, rating INTEGER NOT NULL, dateTime TEXT NOT NULL);');
+            widget.createQuery);
       });
 
-      print("database created!?");
+      // print("database created!?");
 
       await database.insert(
         'journal_entries',
         journalEntryValues.toMap(),
       );
 
-      print('saving journal entry');
+      // print('saving journal entry');
       await database.close(); // close db
 
       Navigator.of(context).pop();

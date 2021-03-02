@@ -9,13 +9,13 @@ class JournalScaffold extends StatefulWidget {
   final childWidget;
 
   JournalScaffold(
-      {Key key,
-      this.darkMode,
-      this.toggleTheme,
-      this.createQuery,
-      this.title,
-      this.childWidget})
-      : super(key: key);
+    {Key key,
+    this.darkMode,
+    this.toggleTheme,
+    this.createQuery,
+    this.title,
+    this.childWidget})
+    : super(key: key);
 
   @override
   _JournalScaffoldState createState() => _JournalScaffoldState();
@@ -25,14 +25,12 @@ class _JournalScaffoldState extends State<JournalScaffold> {
   Widget childWidget;
   String title;
   goToNew(context, destination) {
-    // print("Going to new entry page");
     if (destination == 'newJournalEntry') {
       Navigator.pushNamed(context, 'newJournalEntry');
     }
   }
 
   goToAllEntries(context, destination) {
-    // print("Going to all entries list?");
     if (destination == 'allEntries') {
       Navigator.pushNamed(context, 'allEntries');
     }
@@ -46,8 +44,8 @@ class _JournalScaffoldState extends State<JournalScaffold> {
         actions: [
           Builder(
             builder: (context) => IconButton(
-                icon: Icon(Icons.settings),
-                onPressed: () => Scaffold.of(context).openEndDrawer()),
+              icon: Icon(Icons.settings),
+              onPressed: () => Scaffold.of(context).openEndDrawer()),
           )
         ],
       ),
@@ -67,21 +65,16 @@ class _JournalScaffoldState extends State<JournalScaffold> {
                 ),
               ),
             ),
-            // SwitchListTile(
-            //   title: const Text('Dark Mode'),
-            //   value: widget.darkMode,
-            //   onChanged: widget.toggleTheme,
-            //   secondary: const Icon(Icons.nightlight_round),
-            // )
+            SwitchListTile(
+              title: const Text('Dark Mode'),
+              value: widget.darkMode,
+              onChanged: widget.toggleTheme,
+              secondary: const Icon(Icons.nightlight_round),
+            )
           ],
         ),
       ),
       body: Center(child: widget.childWidget),
-      //     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      //   Text('Welcome from Journal Scaffold'),
-      //   Icon(Icons.book, size: 72.0),
-      //   RaisedButton(onPressed: () => goToAllEntries(context, 'allEntries'))
-      // ])),
       floatingActionButton: FloatingActionButton(
         onPressed: () => goToNew(context, 'newJournalEntry'),
         tooltip: 'New Journal Entry',

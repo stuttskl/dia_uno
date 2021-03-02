@@ -3,7 +3,6 @@ import 'package:dia_uno/widgets/journal_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'screens/home.dart';
 import 'screens/new_entry.dart';
 import 'screens/journal_entry_list.dart';
 import 'screens/journal_entry.dart';
@@ -41,14 +40,13 @@ class _AppState extends State<App> {
       NewJournalEntry.routeName: (context) => NewJournalEntry(createQuery: widget.createQuery),
       JournalEntry.routeName: (context) => JournalEntry(createQuery: widget.createQuery),
       JournalEntries.routeName: (context) =>
-      JournalEntries(createQuery: widget.createQuery),
+      JournalEntries(createQuery: widget.createQuery, darkMode: darkTheme, toggleTheme: toggleTheme),
     };
 
     return MaterialApp(
       routes: routes,
-      title: 'Dia Uno',
-      home: JournalEntries(createQuery: 'hi', darkMode: darkTheme, toggleTheme: toggleTheme),
-      // home: JournalScaffold(darkMode: darkTheme, toggleTheme: toggleTheme),
+      title: 'Día Uno',
+      home: JournalEntries(createQuery: widget.createQuery, darkMode: darkTheme, toggleTheme: toggleTheme),
       theme: darkTheme ? ThemeData.dark() : ThemeData.light());
   }
 }
